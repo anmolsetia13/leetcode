@@ -1,0 +1,52 @@
+Overview
+If we add one statement in the problem description that one could use the utility function in their preferred programming language to generate all permutations from a given list, i.e. itertools.permutations(list) in Python, then many of you would agree that this is definitely an easy problem.
+
+Indeed, if we have all the permutations from the given list of digits, we could simply enumerate each of the permutations to see if we could build a valid time.
+
+At the end of the enumeration, it would be easy to get the maximum of all valid times.
+
+In the following sections, we would first present a solution with the built-in permutation utility.
+
+Then, in case the interviewer insists that one should not use the permutation utility, we also present another solution where we hand-craft the permutations.
+
+Approach 1: Enumerate the Permutations
+Intuition
+
+As we stated before, once we have the permutations at our disposal, the idea is simple: we iterate through all possible permutations of the given 4 digits, and for each permutation, we check if we could build a time out of it in the 24H format (i.e. HH:MM).
+
+There are two conditions that we should meet, in order to construct a valid time format:
+
+HH < 24: The first two digits, i.e. the hour, should be less than 24.
+
+MM < 60: The last two digits, i.e. the minute, should be less than 60.
+
+Algorithm
+
+The algorithm can be implemented in a single loop over all the possible permutations for the given 4 digits.
+
+At each iteration, we check if we could build a valid time based on the conditions we presented before.
+
+Meanwhile, we use a variable (i.e.max_time) to keep track of the maximum valid time that we've seen during the iteration.
+
+
+Note:
+
+We did not provide a solution in Java, since in Java we don't have a built-in function that can do the permutation.
+
+Both the itertools.permutations API in Python and the next_permutation() in C++ can generate the permutations in lexicographic ordering. As a result, one can order the input array in descending order, rather than iterating all possible permutations, one can have an early stop as soon as we find the first valid time, which would also be the largest one, since the permutations are generated in lexicographic ordering.
+
+Complexity Analysis
+
+Time Complexity: \mathcal{O}(1)O(1)
+
+For an array of length NN, the number of permutations would be N!N!. In our case, the input is an array of 4 digits. Hence, the number of permutations would be 4! = 4 * 3 * 2 * 1 = 244!=4∗3∗2∗1=24.
+
+Since the length of the input array is fixed, it would take the same constant time to generate its permutations, regardless the content of the array. Therefore, the time complexity to generate the permutations would be \mathcal{O}(1)O(1).
+
+In the above program, each iteration takes a constant time to process. Since the total number of permutations is fixed (constant), the time complexity of the loop in the algorithm is constant as well, i.e. 24 \cdot \mathcal{O}(1) = \mathcal{O}(1)24⋅O(1)=O(1).
+
+To sum up, the overall time complexity of the algorithm would be \mathcal{O}(1) + \mathcal{O}(1) = \mathcal{O}(1)O(1)+O(1)=O(1).
+
+Space Complexity: \mathcal{O}(1)O(1)
+
+In the algorithm, we keep the permutations for the input digits, which are in total 24, i.e. a constant number regardless the input.
